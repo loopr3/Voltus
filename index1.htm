@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>VOLTUS – Animated Intro</title>
+<style>
+   
+:root {
+  --bg: #060d1c;
+  --text: #eaf6f6;
+  --accent: #40E0D0;
+  --card: #0f1d35;
+  --muted: #9fb2c1;
+  --radius: 16px;
+  --brand-gradient: linear-gradient(135deg,#ff5c8a,#7b2ff7,#40e0d0);
+}
+
+/* === VOLTUS Animated Loader === */
+#voltus-loader {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #060d1c 40%, #020611 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+  animation: loaderFade 1.6s ease 2.8s forwards;
+}
+@keyframes loaderFade {
+  to { opacity: 0; visibility: hidden; }
+}
+
+.voltus-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: fadeInLogo 1s ease forwards;
+}
+@keyframes fadeInLogo {
+  from { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.voltus-mark {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  background: var(--brand-gradient);
+  background-size: 300% 300%;
+  animation: spinMark 2.4s ease-in-out infinite alternate,
+             glowPulse 2s ease-in-out infinite alternate,
+             colorShift 6s linear infinite;
+  box-shadow: 0 0 18px rgba(255,92,138,0.6);
+}
+@keyframes spinMark {
+  0% { transform: rotate(-180deg) scale(0.8); }
+  100% { transform: rotate(180deg) scale(1.05); }
+}
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 12px rgba(255,92,138,0.5); }
+  100% { box-shadow: 0 0 30px rgba(64,224,208,0.8); }
+}
+@keyframes colorShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.voltus-text {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(90deg,#ff9a3c,#ff5c8a,#40e0d0);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGlow 4s linear infinite;
+}
+@keyframes textGlow {
+  0% { background-position: 0% 50%; text-shadow: 0 0 10px rgba(255,92,138,0.5); }
+  50% { background-position: 100% 50%; text-shadow: 0 0 20px rgba(64,224,208,0.6); }
+  100% { background-position: 0% 50%; text-shadow: 0 0 10px rgba(255,92,138,0.5); }
+}
+
+/* === Fade-in effect for main site === */
+main, header, section, footer, #visit-btn {
+  opacity: 0;
+  animation: fadeInMain 1.4s ease 3s forwards;
+}
+@keyframes fadeInMain {
+  to { opacity: 1; }
+}
+
+/* === Demo site styling === */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+header {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg,#009688,#40E0D0);
+  color: #fff;
+}
+header h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+}
+section {
+  max-width: 900px;
+  margin: 60px auto;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+section h2 {
+  color: var(--accent);
+  font-size: 1.5rem;
+  margin-bottom: 14px;
+}
+section p {
+  color: var(--muted);
+  font-size: 1rem;
+}
+footer {
+  text-align: center;
+  color: var(--muted);
+  margin: 40px 0 20px;
+  font-size: 0.9rem;
+}
+
+/* Big button styling */
+#visit-btn {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg,#ff5c8a,#7b2ff7,#40e0d0);
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+#visit-btn:hover {
+  transform: scale(1.05);
+}
+
+</style>
+</head>
+<body>
+
+<!-- VOLTUS Logo Animation -->
+<div id="voltus-loader">
+  <div class="voltus-logo">
+    <div class="voltus-mark"></div>
+    <div class="voltus-text">VOLTUS</div>
+  </div>
+</div>
+
+<!-- Main Page Content -->
+<header>
+  <h1>⚡ Welcome to VOLTUS</h1>
+  <p>Your AI-Powered Fitness & Wellness Companion</p>
+</header>
+
+<main>
+  <section>
+    <h2>Smart AI Features</h2>
+    <p>VOLTUS intelligently customizes your workouts, meal plans, and progress goals — all with elegant, simple design.</p>
+  </section>
+
+  <section>
+    <h2>Real-Time Tracking</h2>
+    <p>Track your movements, analyze your nutrition, and earn badges as you grow stronger every day.</p>
+  </section>
+
+  <!-- Big button to visit your website -->
+ <a href="http://127.0.0.1:5500/iit%20bbsr/index.html"><button id="visit-btn" style="text-decoration: none;">Go to My Website</button></a>
+
+  <footer>
+    © 2025 VOLTUS | Designed by Codex 💪
+  </footer>
+</main>
+
+
+
+</body>
+</html>

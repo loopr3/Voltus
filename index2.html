@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>VOLT Dashboard</title>
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: Segoe UI, Arial, sans-serif;
+    background: #f5f6f8;
+    color: #111827;
+    transition: background 0.3s;
+  }
+
+  .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    transition: all 0.3s;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 16px rgba(15,23,42,0.06);
+    margin-bottom: 26px;
+    transition: all 0.3s;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(135deg,#ff9a3c,#ff5c8a);
+    box-shadow: 0 2px 8px rgba(123,47,247,0.12);
+    transition: all 0.3s;
+  }
+
+  .logo-mark:hover {
+    transform: scale(1.1);
+  }
+
+  .logo-text {
+    font-weight: 800;
+    font-size: 20px;
+    color: #7b2ff7;
+  }
+
+  .nav-actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn-neutral {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-neutral:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+  }
+
+  .toggle-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #111827;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .toggle-circle:hover {
+    transform: scale(1.1);
+  }
+
+  .card-wide {
+    background: #fff;
+    padding: 36px 28px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(15,23,42,0.07);
+    text-align: center;
+    margin-bottom: 22px;
+    transition: all 0.3s;
+  }
+
+  .card-wide:hover {
+    transform: translateY(-3px);
+  }
+
+  .feeling-title {
+    font-size: 20px;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+
+  .pill-row {
+    display: inline-flex;
+    gap: 14px;
+  }
+
+  .pill {
+    border: none;
+    padding: 9px 22px;
+    border-radius: 999px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .pill:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+
+  .pill.blue { background: #2563eb; }
+  .pill.gray { background: #6b7280; }
+  .pill.green { background: #16a34a; }
+
+  .reminders {
+    background: #fff;
+    padding: 22px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(15,23,42,0.07);
+    margin-bottom: 28px;
+    transition: all 0.3s;
+  }
+
+  .reminders:hover {
+    transform: translateY(-2px);
+  }
+
+  .reminders .header {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 18px;
+    font-size: 18px;
+  }
+
+  .reminder-grid {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .reminder-col {
+    flex: 1;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  input[type="time"],
+  input[type="number"],
+  input[type="text"] {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #e7e7ea;
+    transition: all 0.3s;
+  }
+
+  input[type="time"]:focus,
+  input[type="number"]:focus,
+  input[type="text"]:focus {
+    border-color: #7b2ff7;
+    box-shadow: 0 0 6px rgba(123,47,247,0.3);
+  }
+
+  .reminder-actions {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .btn-purple {
+    flex: 1;
+    background: linear-gradient(90deg,#7b2ff7,#b24cff);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-purple:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+
+  .btn-blue {
+    flex: 1;
+    background: linear-gradient(90deg,#1d4ed8,#2563eb);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-blue:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+
+  .three-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 22px;
+    transition: all 0.3s;
+  }
+
+  .card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 18px;
+    box-shadow: 0 6px 16px rgba(15,23,42,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s;
+  }
+
+  .card:hover { transform: translateY(-3px); }
+
+  .card-title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .workout-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .stats {
+    text-align: right;
+    color: #6b7280;
+    font-weight: 700;
+  }
+
+  .stats.small { font-size: 12px; }
+  .stats.note { font-size: 13px; font-weight:600; margin-top:8px; color:#6b7280; }
+
+  .stat-num { display: block; font-size: 22px; }
+
+  .video-box {
+    height: 190px;
+    background: #000;
+    border-radius: 12px;
+    border: 6px solid rgba(0,0,0,0.04);
+    transition: all 0.3s;
+  }
+
+  .video-box:hover { transform: scale(1.02); }
+
+  .workout-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .btn-outline {
+    background: #efefef;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    background: #e0e0e0;
+    transform: scale(1.05);
+  }
+
+  .btn-save {
+    background: #2563eb;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-save:hover { transform: scale(1.05); opacity:0.85; }
+
+  .center-widget input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #e7e7ea;
+    transition: all 0.3s;
+  }
+
+  .go-btn,
+  .gen-btn,
+  .ask-btn,
+  .analyze-btn {
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    transition: all 0.3s;
+  }
+
+  .go-btn:hover,
+  .gen-btn:hover,
+  .ask-btn:hover,
+  .analyze-btn:hover { transform: scale(1.05); }
+
+  .go-btn { background: #9b4cff; }
+  .analyze-btn { background: linear-gradient(90deg,#0f9b4a,#f13b8a); width:100%; }
+  .gen-btn, .ask-btn { background: #16a34a; }
+
+  .meal-planner { margin-top:14px; }
+  .meal-planner input { flex:1; }
+
+  .ai-coach .coach-panel { background:#f3f4f6; border-radius:10px; min-height:160px; }
+
+  .two-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 18px;
+    transition: all 0.3s;
+  }
+
+  .predictor p {
+    color: #6b7280;
+    line-height: 1.6;
+  }
+
+  .predictor .highlight {
+    color: #059669;
+    font-weight: 800;
+  }
+
+  .challenge .btn-cta {
+    width: 80%;
+    padding: 14px;
+    border-radius: 12px;
+    background: linear-gradient(90deg,#ff7a18,#ffb347);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 14px 40px rgba(255,122,24,0.12);
+    transition: all 0.3s;
+  }
+
+  .challenge .btn-cta:hover { transform: scale(1.05); }
+
+  .history {
+    background: #fff;
+    padding: 18px 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(15,23,42,0.06);
+    margin-top: 22px;
+    transition: all 0.3s;
+  }
+
+  .history:hover { transform: translateY(-2px); }
+
+  .history-title { font-weight:700; font-size:16px; margin-bottom:8px; }
+  .history-text { color:#6b7280; }
+
+  @media (max-width: 1100px) {
+    .three-grid, .two-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="logo-mark"></div><div class="logo-text">VOLT</div></div>
+    <div class="nav-actions"><div class="btn-neutral">Profile</div><div class="toggle-circle"></div></div>
+  </header>
+
+  <section class="card-wide">
+    <div class="feeling-title">How are you feeling today?</div>
+    <div class="pill-row">
+      <button class="pill blue">Energetic</button>
+      <button class="pill gray">Tired</button>
+      <button class="pill green">Stressed</button>
+    </div>
+  </section>
+
+  <section class="reminders">
+    <div class="header">Reminders</div>
+    <div class="reminder-grid">
+      <div class="reminder-col"><label for="gym-time">Gym Time</label><input type="time" id="gym-time"></div>
+      <div class="reminder-col"><label for="water-interval">Water Interval (min)</label><input type="number" value="60" id="water-interval"></div>
+    </div>
+    <div class="reminder-actions">
+      <button class="btn-purple">Set Gym Reminder</button>
+      <button class="btn-blue">Start Water Reminder</button>
+    </div>
+  </section>
+
+  <section class="three-grid">
+    <div class="card">
+      <div class="card-title">Workout Tracker</div>
+      <div class="workout-top">
+        <div>
+          <label>Exercise</label><br>
+          <select><option>Squat</option><option>Push-up</option><option>Plank</option></select>
+          <div class="stats note">Start the camera to begin.</div>
+        </div>
+        <div class="stats">
+          <div class="stats small">Reps</div>
+          <div class="stat-num">0</div>
+          <div class="stats small">Time</div>
+          <div class="stats">00:00</div>
+        </div>
+      </div>
+      <div class="video-box"></div>
+      <div class="workout-actions">
+        <button class="btn-purple">Start Camera</button>
+        <button class="btn-outline">Reset</button>
+        <button class="btn-save">Save Set</button>
+      </div>
+      <div class="stats note">Badges</div>
+    </div>
+
+    <div class="card center-widget">
+      <div class="card-title">Nutrition Lookup</div>
+      <div class="meal-planner">
+        <input type="text" placeholder="e.g., '1 cup of rice'">
+        <button class="go-btn">Go</button>
+      </div>
+      <div class="stats note" style="text-align:center;">OR</div>
+      <button class="analyze-btn">Analyze Meal from Image</button>
+      <div class="meal-planner">
+        <div class="card-title">7-Day AI Meal Planner</div>
+        <div style="display:flex;gap:10px;">
+          <input type="text" placeholder="Daily calories (e.g., 2200)">
+          <button class="gen-btn">Generate</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card ai-coach">
+      <div class="card-title">AI Fitness Coach</div>
+      <div class="coach-panel"></div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <input type="text" placeholder="Ask about fitness...">
+        <button class="ask-btn">Ask</button>
+      </div>
+      <div class="card-title">Progress Dashboard</div>
+      <div class="stats note">Shows total reps per exercise for the last 14 days.</div>
+    </div>
+  </section>
+
+  <section class="two-grid">
+    <div class="card predictor">
+      <div class="card-title">Progress Predictor</div>
+      <p>Based on your activity, you're on track to lose <span class="highlight">2.1 kg</span> in the next 4 weeks!</p>
+    </div>
+    <div class="card challenge">
+      <div class="card-title">Rewards & Challenges</div>
+      <p class="stats note">You've earned <strong style="color:#ff8a4b">1,250 points</strong> this week! Click below for a new challenge.</p>
+      <div class="challenge-btn-wrapper">
+        <button class="btn-cta">Generate New Challenge</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="history">
+    <div class="history-title">Workout History</div>
+    <div class="history-text">No history yet. Your past workouts will appear here.</div>
+  </section>
+</div>
+</body>
+</html>
